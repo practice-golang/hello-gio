@@ -36,7 +36,7 @@ func loop(w *app.Window) error {
 			return e.Err
 		case system.FrameEvent:
 			gtx := layout.NewContext(&ops, e)
-			l := material.H1(th, "안녕 지오 / Hello, Gio")
+			l := material.H1(th, "안녕, 지오\nHello, Gio")
 			maroon := color.NRGBA{127, 0, 0, 255}
 			l.Color = maroon
 			l.Alignment = text.Middle
