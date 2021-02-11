@@ -1,4 +1,4 @@
-# Golang Gio practice
+# [Gio](https://gioui.org/) practice
 
 Copied [gio-example/hello](https://git.sr.ht/~eliasnaur/gio-example/tree/main/item/hello)
 
