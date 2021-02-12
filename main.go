@@ -18,6 +18,7 @@ import (
 func main() {
 	go func() {
 		w := app.NewWindow()
+		w.Invalidate() // Prevent eat system.FrameEvent
 		if err := loop(w); err != nil {
 			log.Fatal(err)
 		}

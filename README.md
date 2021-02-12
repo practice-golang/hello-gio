@@ -1,5 +1,7 @@
 # [Gio](https://gioui.org/) practice
 
+![hello_screenshot](./screenshot.png)
+
 Copied [gio-example/hello](https://git.sr.ht/~eliasnaur/gio-example/tree/main/item/hello)
 
 ## Run
@@ -25,7 +27,3 @@ once.Do(func() {
 ```
 
 For CJK showing, Changed font from `gioui.org/font/gofont` to `giofont`
-
-(maybe) Current Gio have a redering bug on MS-Windows so, maximize then restore window when running.
-
-![hello_screenshot](./screenshot.png)
