@@ -5,6 +5,8 @@
 ~~Copied [gio-example/hello](https://git.sr.ht/~eliasnaur/gio-example/tree/main/item/hello)~~
 https://jonegil.github.io/gui-with-gio
 
+Android practice : https://github.com/practice-golang/hello-fembed
+
 ## Run
 ```sh
 $ go run ./main.go

@@ -35,8 +35,8 @@ func loop(w *app.Window) error {
 	var ops op.Ops
 
 	var startButton widget.Clickable
-	var btnMSG string = "바꿔!"
-	var headerMSG string = "안녕, 지오\nHello, Gio"
+	var btnText string = "바꿔!"
+	var messageText string = "안녕, 지오\nHello, Gio"
 
 	spacerNarrow := layout.Rigid(layout.Spacer{Height: unit.Dp(4)}.Layout)
 	spacerWide := layout.Rigid(
@@ -46,12 +46,12 @@ func loop(w *app.Window) error {
 			return layout.Spacer{Height: unit.Dp(32)}.Layout(gtx)
 		},
 	)
-	titleHeader := layout.Rigid(
+	msgArea := layout.Rigid(
 		func(gtx layout.Context) layout.Dimensions {
 			// paint.ColorOp{Color: colors["cream"]}.Add(gtx.Ops)
 			// paint.PaintOp{}.Add(gtx.Ops)
 
-			l := material.H1(th, headerMSG)
+			l := material.H1(th, messageText)
 			l.Color = colors["maroon"]
 			l.Alignment = text.Middle
 
@@ -73,13 +73,13 @@ func loop(w *app.Window) error {
 			}
 
 			return margins.Layout(gtx, func(gtx layout.Context) layout.Dimensions {
-				btn := material.Button(th, &startButton, btnMSG)
+				btn := material.Button(th, &startButton, btnText)
 				return btn.Layout(gtx)
 			})
 		},
 	)
 
-	myLayout := []layout.FlexChild{spacerNarrow, titleHeader, spacerWide, buttonArea}
+	myLayout := []layout.FlexChild{spacerNarrow, msgArea, spacerWide, buttonArea}
 
 	for {
 		e := <-w.Events()
@@ -90,12 +90,12 @@ func loop(w *app.Window) error {
 			gtx := layout.NewContext(&ops, e)
 
 			if startButton.Clicked() {
-				if btnMSG == "바꿔!" {
-					btnMSG = "갈굼 멈춰!"
-					headerMSG = "안돼, 안 바꿔줘\n바꿀 생각 없어. 빨리 돌아가"
+				if btnText == "바꿔!" {
+					btnText = "갈굼 멈춰!"
+					messageText = "안돼, 안 바꿔줘\n바꿀 생각 없어. 빨리 돌아가"
 				} else {
-					btnMSG = "바꿔!"
-					headerMSG = "안녕, 지오\nHello, Gio"
+					btnText = "바꿔!"
+					messageText = "안녕, 지오\nHello, Gio"
 				}
 			}
 
