@@ -4,11 +4,13 @@ go 1.15
 
 require (
 	giofont v0.0.0-00010101000000-000000000000
-	gioui.org v0.0.0-20210209100840-ebfb17ec6c56
-	golang.org/x/exp v0.0.0-20210126221216-84987778548c // indirect
-	golang.org/x/image v0.0.0-20201208152932-35266b937fa6 // indirect
-	golang.org/x/sys v0.0.0-20210113181707-4bcb84eeeb78 // indirect
-	golang.org/x/text v0.3.4 // indirect
+	gioui.org v0.0.0-20210906150921-30663a71c5a8
+	git.wow.st/gmp/jni v0.0.0-20210610011705-34026c7e22d0 // indirect
+	github.com/inkeliz/gowebview v1.0.1
+	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
+	golang.org/x/exp v0.0.0-20210903233438-a2d0902c3ac7 // indirect
+	golang.org/x/sys v0.0.0-20210906170528-6f6e22806c34 // indirect
+	golang.org/x/text v0.3.7 // indirect
 )
 
 replace giofont => ./giofont
