@@ -2,12 +2,20 @@
 
 ![hello_screenshot](./screenshot.png)
 
-Copied [gio-example/hello](https://git.sr.ht/~eliasnaur/gio-example/tree/main/item/hello)
+~~Copied [gio-example/hello](https://git.sr.ht/~eliasnaur/gio-example/tree/main/item/hello)~~
+https://jonegil.github.io/gui-with-gio
 
 ## Run
 ```sh
 $ go run ./main.go
 ```
+or
+```sh
+# fonts directory must be placed to same path with hello-gio binary
+$ go build -ldflags="-H windowsgui"
+$ ./hello-gio
+```
+
 
 ## Font
 ```go
