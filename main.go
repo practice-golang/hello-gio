@@ -38,6 +38,49 @@ func loop(w *app.Window) error {
 	var btnMSG string = "바꿔!"
 	var headerMSG string = "안녕, 지오\nHello, Gio"
 
+	spacerNarrow := layout.Rigid(layout.Spacer{Height: unit.Dp(4)}.Layout)
+	spacerWide := layout.Rigid(
+		func(gtx layout.Context) layout.Dimensions {
+			myRect := image.Rect(0, 0, gtx.Constraints.Max.X, gtx.Constraints.Max.Y)
+			paint.FillShape(gtx.Ops, colors["white"], clip.Rect(myRect).Op())
+			return layout.Spacer{Height: unit.Dp(32)}.Layout(gtx)
+		},
+	)
+	titleHeader := layout.Rigid(
+		func(gtx layout.Context) layout.Dimensions {
+			// paint.ColorOp{Color: colors["cream"]}.Add(gtx.Ops)
+			// paint.PaintOp{}.Add(gtx.Ops)
+
+			l := material.H1(th, headerMSG)
+			l.Color = colors["maroon"]
+			l.Alignment = text.Middle
+
+			// paint.Fill(gtx.Ops, colors["cream"]) // 전체
+			// myRect := image.Rect(0, 0, gtx.Constraints.Max.X, gtx.Constraints.Max.Y) // 위쪽 스페이서 제외한 영역
+			myRect := image.Rect(0, 0, l.Layout(gtx).Size.X, l.Layout(gtx).Size.X) // 가로세로
+			paint.FillShape(gtx.Ops, colors["cream"], clip.Rect(myRect).Op())
+
+			return l.Layout(gtx)
+		},
+	)
+	buttonArea := layout.Rigid(
+		func(gtx layout.Context) layout.Dimensions {
+			margins := layout.Inset{
+				Top:    unit.Dp(25),
+				Bottom: unit.Dp(25),
+				Right:  unit.Dp(35),
+				Left:   unit.Dp(35),
+			}
+
+			return margins.Layout(gtx, func(gtx layout.Context) layout.Dimensions {
+				btn := material.Button(th, &startButton, btnMSG)
+				return btn.Layout(gtx)
+			})
+		},
+	)
+
+	myLayout := []layout.FlexChild{spacerNarrow, titleHeader, spacerWide, buttonArea}
+
 	for {
 		e := <-w.Events()
 		switch e := e.(type) {
@@ -48,8 +91,8 @@ func loop(w *app.Window) error {
 
 			if startButton.Clicked() {
 				if btnMSG == "바꿔!" {
-					btnMSG = "멈춰!"
-					headerMSG = "잘가, 지오\nHello, Gio"
+					btnMSG = "갈굼 멈춰!"
+					headerMSG = "안돼, 안 바꿔줘\n바꿀 생각 없어. 빨리 돌아가"
 				} else {
 					btnMSG = "바꿔!"
 					headerMSG = "안녕, 지오\nHello, Gio"
@@ -60,50 +103,7 @@ func loop(w *app.Window) error {
 				Axis:    layout.Vertical,
 				Spacing: layout.SpaceBetween,
 				// Spacing: layout.SpaceEnd,
-			}.Layout(gtx,
-				layout.Rigid(
-					layout.Spacer{Height: unit.Dp(4)}.Layout,
-				),
-				layout.Rigid(
-					func(gtx layout.Context) layout.Dimensions {
-						// paint.ColorOp{Color: colors["cream"]}.Add(gtx.Ops)
-						// paint.PaintOp{}.Add(gtx.Ops)
-
-						l := material.H1(th, headerMSG)
-						l.Color = colors["maroon"]
-						l.Alignment = text.Middle
-
-						// paint.Fill(gtx.Ops, colors["cream"]) // 전체
-						// myRect := image.Rect(0, 0, gtx.Constraints.Max.X, gtx.Constraints.Max.Y) // 위쪽 스페이서 제외한 영역
-						myRect := image.Rect(0, 0, l.Layout(gtx).Size.X, l.Layout(gtx).Size.X) // 가로세로
-						paint.FillShape(gtx.Ops, colors["cream"], clip.Rect(myRect).Op())
-
-						return l.Layout(gtx)
-					},
-				),
-				layout.Rigid(
-					func(gtx layout.Context) layout.Dimensions {
-						myRect := image.Rect(0, 0, gtx.Constraints.Max.X, gtx.Constraints.Max.Y)
-						paint.FillShape(gtx.Ops, colors["white"], clip.Rect(myRect).Op())
-						return layout.Spacer{Height: unit.Dp(32)}.Layout(gtx)
-					},
-				),
-				layout.Rigid(
-					func(gtx layout.Context) layout.Dimensions {
-						margins := layout.Inset{
-							Top:    unit.Dp(25),
-							Bottom: unit.Dp(25),
-							Right:  unit.Dp(35),
-							Left:   unit.Dp(35),
-						}
-
-						return margins.Layout(gtx, func(gtx layout.Context) layout.Dimensions {
-							btn := material.Button(th, &startButton, btnMSG)
-							return btn.Layout(gtx)
-						})
-					},
-				),
-			)
+			}.Layout(gtx, myLayout...)
 
 			e.Frame(gtx.Ops)
 		}
